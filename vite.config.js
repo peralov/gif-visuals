@@ -3,6 +3,7 @@ import legacy from "@vitejs/plugin-legacy";
 
 export default defineConfig({
   root: "public", // Serve files from the 'public' directory
+  base: "/gif-visuals/",
   plugins: [
     legacy({
       targets: ["defaults", "not IE 11"],
@@ -12,7 +13,7 @@ export default defineConfig({
     // Proxy API requests to your Node.js backend
     proxy: {
       "/socket.io": {
-        target: "http://localhost:8000", // Assuming your Node.js server runs on port 3000
+        target: "http://localhost:8000",
         ws: true,
       },
       // If you have other API endpoints, add them here
