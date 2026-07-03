@@ -1,6 +1,13 @@
+# Gif Visuals
+
+Demo: [Gif Visuals](https://peralov.github.io/gif-visuals).
+
+![Image of the Gif Visuals demo](./img/cover2.png)
+
 # Project Setup and Development
 
 This project consists of a Node.js backend server and client-side applications: a main application and a mobile controller. The client-side is now served using Vite for development.
+
 
 ### Prerequisites
 
