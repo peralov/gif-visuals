@@ -3,14 +3,20 @@
   "version": "0.0.1",
   "description": "gif visuals server",
   "engines": {
-    "node": "5.9.1"
+    "node": ">=18.0.0"
   },
   "main": "index.js",
   "dependencies": {
     "express": "^4.15.2",
     "socket.io": "^1.7.3"
   },
+  "devDependencies": {
+    "vite": "^5.0.0",
+    "@vitejs/plugin-legacy": "^5.0.0"
+  },
   "scripts": {
-    "start": "node index.js"
+    "start": "node index.js",
+    "dev:client": "vite",
+    "build": "vite build"
   }
 }
