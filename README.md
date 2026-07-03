@@ -6,6 +6,7 @@ A demo of this project is available on https://peralov.github.io/gif-visuals
 
 This project consists of a Node.js backend server and client-side applications: a main application and a mobile controller. The client-side is served using Vite for development.
 
+
 ### Prerequisites
 
 *   Node.js (version 18 or higher recommended)
