@@ -1,6 +1,10 @@
-# Project Setup and Development
+# Gif Visuals
 
-This project consists of a Node.js backend server and client-side applications: a main application and a mobile controller. The client-side is now served using Vite for development.
+A demo of this project is available on https://peralov.github.io/gif-visuals
+
+## Project Setup and Development
+
+This project consists of a Node.js backend server and client-side applications: a main application and a mobile controller. The client-side is served using Vite for development.
 
 ### Prerequisites
 
@@ -56,7 +60,7 @@ To run the project, you need to start both the Node.js backend server and the Vi
         *   `sms.html`: Another HTML file related to the mobile functionality.
         *   `style.css`: CSS for the mobile controller.
 *   `gif-visuals/index.js`: The main Node.js server file, handling static file serving (in production) and Socket.IO connections.
-*   `gif-visuals/gifsApi.js`: Likely contains logic for interacting with a GIF API.
+*   `gif-visuals/gifsApi.js`: Contains logic for interacting with a GIF API.
 *   `gif-visuals/package.json`: Project metadata and script definitions.
 *   `gif-visuals/vite.config.js`: Configuration for the Vite development server.
 

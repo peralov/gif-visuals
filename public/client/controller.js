@@ -120,7 +120,7 @@ class gifVisual {
       this.init.call(this, mockData);
       setTimeout(() => {
         this.view.initGrid.call(this.view, null, 8);
-      }, 5);
+      }, 300);
     } else {
       this.io = io ? io() : null;
       this.io.on("connect", () => {
