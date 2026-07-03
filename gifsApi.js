@@ -2,111 +2,93 @@
 const imagePath = "public/gifs/";
 const fs = require("fs");
 
-
 class gifsApi {
+  constructor() {
+    this.selected = [];
+    this.effect = "colorEffect";
+    this.grid = 8;
+    this.speed = 1;
+    this.word = "TRAP DA FUCK UP 2.4";
 
-    constructor() {
+    this.imageTree = this.createList("/gifs/");
+    this.hiddenTree = this.createList("/secret/");
+    this.setRandom.call(this);
 
-        this.selected = [];
-        this.effect = "colorEffect";
-        this.grid = 8;
-        this.speed = 1;
-        this.word = "TRAP DA FUCK UP 2.4";
+    this.getData = () => {
+      return {
+        imageTree: this.imageTree,
+        hiddenTree: this.hiddenTree,
+        images: this.selected,
+        effect: this.effect,
+        speed: this.speed,
+        word: this.word,
+        grid: this.grid,
+      };
+    };
 
-        this.imageTree = this.createList("/gifs/");
-        this.hiddenTree = this.createList("/secret/");
+    this.setWord = (word) => {
+      this.word = word;
+    };
+
+    this.setGrid = (grid) => {
+      this.grid = parseInt(grid);
+    };
+
+    this.setEffect = (effect) => {
+      this.effect = effect;
+    };
+
+    this.setSpeed = (speed) => {
+      this.speed = Number(speed);
+    };
+
+    this.setImages = (index, hidden) => {
+      if (index == null) {
         this.setRandom.call(this);
+      } else if (hidden) {
+        this.setSelected.call(this, this.hiddenTree[index]);
+      } else {
+        this.setSelected.call(this, this.imageTree[index]);
+      }
+    };
+  }
 
-        this.getData = () => {
-            return {
-                imageTree: this.imageTree,
-                hiddenTree: this.hiddenTree,
-                images: this.selected,
-                effect: this.effect,
-                speed: this.speed,
-                word: this.word,
-                grid: this.grid
-            }
-        };
+  createList(path) {
+    let list = [];
 
-        this.setWord = (word) => {
-            this.word = word;
-        }
+    let inPath = "public" + path;
 
-        this.setGrid = (grid) => {
-            this.grid = parseInt(grid);
-        };
+    let paths = fs.readdirSync(inPath);
 
-        this.setEffect = (effect) => {
-            this.effect = effect;
-        };
+    for (let i = 0; i < paths.length; i++) {
+      let pathUrl = inPath + paths[i];
+      let fileNames = fs.readdirSync(pathUrl);
 
-        this.setSpeed = (speed) => {
-            this.speed = Number(speed);
-        };
+      list[i] = [];
 
-        this.setImages = (index, hidden) => {
-            if(index == null){
-                this.setRandom.call(this);
-            }else if(hidden){
-                this.setSelected.call(this, this.hiddenTree[index])
-            }else {
-                this.setSelected.call(this, this.imageTree[index])
-            }
-        };
-
+      for (let j = 0; j < fileNames.length; j++) {
+        list[i][j] = path + paths[i] + "/" + fileNames[j];
+      }
     }
 
+    return list;
+  }
 
-    createList(path) {
+  setRandom() {
+    let imageTree = this.imageTree;
+    let randomList = imageTree[Math.floor(Math.random() * imageTree.length)];
+    this.setSelected.call(this, randomList);
+  }
 
-        let list = [];
+  setSelected(newSelected) {
+    this.selected = Object.assign([], newSelected);
+  }
 
-        let inPath = "public"+path;
+  selectContainer() {}
 
-        let paths = fs.readdirSync(inPath);
+  getSelected() {}
 
-        for (let i = 0; i < paths.length; i++) {
-
-            let pathUrl = inPath + paths[i];
-            let fileNames = fs.readdirSync(pathUrl);
-
-            list[i] = [];
-
-
-            for (let j = 0; j < fileNames.length; j++) {
-                list[i][j] = path + paths[i] + "/" + fileNames[j];
-            }
-        }
-
-        return list;
-    }
-
-    setRandom() {
-
-        let imageTree = this.imageTree;
-        let randomList = imageTree[Math.floor(Math.random() * imageTree.length)]
-        this.setSelected.call(this, randomList);
-    }
-
-    setSelected(newSelected) {
-        this.selected = Object.assign([], newSelected);
-    }
-
-    selectContainer() {
-
-    }
-
-    getSelected() {
-
-
-    }
-
-    selectGroup() {
-
-
-    }
-
+  selectGroup() {}
 }
 
 module.exports = gifsApi;

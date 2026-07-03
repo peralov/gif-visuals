@@ -1,13 +1,14 @@
 # Node build artifacts
 node_modules
 dist
-
 npm-debug.log
 
 # Local development
 *.env
 *.dev
 .DS_Store
+.cursor
+.idea
 
 # Docker
 Dockerfile
