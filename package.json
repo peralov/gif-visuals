@@ -19,7 +19,6 @@
     "start": "node index.js",
     "dev": "vite",
     "build": "vite build",
-    "build:pages": "npm run build && node scripts/prepare-pages-dist.mjs",
-    "deploy": "gh-pages -d dist"
+    "build:pages": "npm run build && node scripts/prepare-pages-dist.mjs"
   }
 }
