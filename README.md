@@ -2,7 +2,7 @@
 
 Demo: [Gif Visuals](https://peralov.github.io/gif-visuals).
 
-![Image of the Gif Visuals demo](./img/cover2.png)
+![Image of the Gif Visuals demo](./public/img/cover2.png)
 
 # Project Setup and Development
 
