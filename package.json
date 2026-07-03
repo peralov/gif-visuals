@@ -17,10 +17,9 @@
   },
   "scripts": {
     "start": "node index.js",
-    "dev:client": "vite",
+    "dev": "vite",
     "build": "vite build",
     "build:pages": "npm run build && node scripts/prepare-pages-dist.mjs",
-    "predeploy": "npm run build:pages",
     "deploy": "gh-pages -d dist"
   }
 }

@@ -119,6 +119,9 @@ class gifVisual {
   initSockets() {
     if (window.io === undefined) {
       this.init.call(this, mockData);
+      setTimeout(() => {
+        this.view.initGrid.call(this.view, null, 8);
+      }, 5);
     } else {
       this.io = io ? io() : null;
       this.io.on("connect", () => {
@@ -132,6 +135,7 @@ class gifVisual {
     this.loadImages.call(this, data.images);
     this.changeWord(data.word);
     this.view.initGrid.call(this.view, null, data.grid);
+
     this.effects.applyEffectType(data.effect);
     this.effects.changeSpeed(data.speed);
   }
@@ -204,21 +208,24 @@ class gifVisual {
         this.effects.applyEffect(0);
         break;
       case "w":
-        this.effects.applyEffect(1);
-        break;
-      case "e":
-        this.effects.applyEffect(2);
-        break;
-      case "r":
-        this.effects.applyEffect(3);
-        break;
-      case "t":
         this.effects.applyEffect(4);
         break;
-      case "a":
-        //this.getImages.call(this);
+      case "r":
+        this.effects.applyEffect(2);
         break;
-      case "s":
+      case "e":
+        this.effects.applyEffect(3);
+        break;
+      case "f":
+        this.effects.applyEffect(1);
+        break;
+      case "a":
+        // only from client list
+        const { imageTree } = mockData;
+        const imageList = imageTree[(Math.random() * imageTree.length) | 0];
+        this.loadImages.call(this, imageList);
+        break;
+      case " ":
         let header = document.querySelector("#header");
         header.classList.toggle("hidden");
       default:
