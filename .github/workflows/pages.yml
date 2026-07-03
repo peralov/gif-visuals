@@ -6,16 +6,14 @@ on:
   workflow_dispatch:
 
 permissions:
-  contents: read
-  pages: write
-  id-token: write
+  contents: write
 
 concurrency:
   group: pages
-  cancel-in-progress: true
+  cancel-in-progress: false
 
 jobs:
-  build:
+  deploy:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
@@ -32,6 +30,8 @@ jobs:
         run: |
           echo "=== Hypothesis A: index.html at artifact root ==="
           test -f dist/index.html && echo "PASS: dist/index.html exists" || (echo "FAIL: missing dist/index.html" && exit 1)
+          echo "=== Hypothesis B: no node_modules in dist ==="
+          test ! -d dist/node_modules && echo "PASS: dist has no node_modules" || (echo "FAIL: node_modules in dist" && exit 1)
           echo "=== Hypothesis C: .nojekyll present ==="
           test -f dist/.nojekyll && echo "PASS: dist/.nojekyll exists" || (echo "FAIL: missing dist/.nojekyll" && exit 1)
           echo "=== Hypothesis E: static assets copied ==="
@@ -39,20 +39,21 @@ jobs:
           test -d dist/css && echo "PASS: dist/css exists" || (echo "FAIL: missing dist/css" && exit 1)
           echo "=== Artifact inventory ==="
           find dist -type f | wc -l
-          find dist -maxdepth 2 -type f | head -30
           du -sh dist
 
-      - uses: actions/upload-pages-artifact@v3
+      - name: Publish dist to gh-pages branch
+        uses: peaceiris/actions-gh-pages@v4
         with:
-          path: dist
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./dist
+          publish_branch: gh-pages
+          force_orphan: true
 
-  deploy:
-    needs: build
-    runs-on: ubuntu-latest
-    environment:
-      name: github-pages
-      url: ${{ steps.deployment.outputs.page_url }}
-    steps:
-      - name: Deploy to GitHub Pages
-        id: deployment
-        uses: actions/deploy-pages@v4
+      - name: Post-deploy verification
+        run: |
+          echo "=== Hypothesis F: gh-pages branch is clean after publish ==="
+          git fetch origin gh-pages
+          git ls-tree -r origin/gh-pages --name-only | tee /tmp/gh-pages-files.txt
+          echo "file count: $(wc -l < /tmp/gh-pages-files.txt)"
+          grep -q node_modules /tmp/gh-pages-files.txt && echo "FAIL: node_modules on gh-pages" && exit 1 || echo "PASS: no node_modules on gh-pages"
+          grep -q '^index.html$' /tmp/gh-pages-files.txt && echo "PASS: index.html at gh-pages root" || (echo "FAIL: index.html missing" && exit 1)
