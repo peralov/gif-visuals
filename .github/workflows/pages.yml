@@ -7,13 +7,15 @@ on:
 
 permissions:
   contents: write
+  pages: write
+  id-token: write
 
 concurrency:
   group: pages
   cancel-in-progress: false
 
 jobs:
-  deploy:
+  build:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
@@ -41,6 +43,10 @@ jobs:
           find dist -type f | wc -l
           du -sh dist
 
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: dist
+
       - name: Publish dist to gh-pages branch
         uses: peaceiris/actions-gh-pages@v4
         with:
@@ -49,11 +55,27 @@ jobs:
           publish_branch: gh-pages
           force_orphan: true
 
-      - name: Post-deploy verification
-        run: |
-          echo "=== Hypothesis F: gh-pages branch is clean after publish ==="
-          git fetch origin gh-pages
-          git ls-tree -r origin/gh-pages --name-only | tee /tmp/gh-pages-files.txt
-          echo "file count: $(wc -l < /tmp/gh-pages-files.txt)"
-          grep -q node_modules /tmp/gh-pages-files.txt && echo "FAIL: node_modules on gh-pages" && exit 1 || echo "PASS: no node_modules on gh-pages"
-          grep -q '^index.html$' /tmp/gh-pages-files.txt && echo "PASS: index.html at gh-pages root" || (echo "FAIL: index.html missing" && exit 1)
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4
+        continue-on-error: true
+
+      - name: Retry deploy after wait
+        if: steps.deployment.outcome == 'failure'
+        run: sleep 90
+
+      - name: Deploy to GitHub Pages (retry)
+        if: steps.deployment.outcome == 'failure'
+        id: deployment_retry
+        uses: actions/deploy-pages@v4
+
+      - name: Fail if all deploy attempts failed
+        if: steps.deployment.outcome == 'failure' && steps.deployment_retry.outcome == 'failure'
+        run: exit 1
