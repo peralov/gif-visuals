@@ -1,45 +1,46 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Mobile Controller</title>
-    <script src="mobileController.js"></script>
-    <script src="../socket.io/socket.io.js"></script>
-    <link rel="stylesheet" type="text/css" href="style.css">
+    <head>
+        <meta charset="UTF-8" />
+        <title>Mobile Controller</title>
+        <script src="mobileController.js"></script>
+        <script src="../socket.io/socket.io.js"></script>
+        <link rel="stylesheet" type="text/css" href="style.css" />
 
-    <meta name="viewport"
-          content="width=device-width, initial-scale=1.0, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
-</head>
-<body>
-<div class="category">
-    <button name="images" value=0>random images</button>
-</div>
-<div class="category">
-    <button name="grid" value="1">1</button>
-    <button name="grid" value="2">2</button>
-    <button name="grid" value="4">4</button>
-    <button name="grid" value="7">7</button>
-    <button name="grid" value="9">9</button>
-    <button name="grid" value="14">14</button>
-</div>
-<div class="category">
-    <button name="speed" value="0.5">Slow</button>
-    <button name="speed" value="1">Normal</button>
-    <button name="speed" value="2">Fast</button>
-    <button name="speed" value="4">Super Fast</button>
-</div>
-<div class="category">
-    <button name="effect" value="swipeEffect">swipe</button>
-    <button name="effect" value="colorEffect">color</button>
-    <button name="effect" value="flipEffect">flip</button>
-    <button name="effect" value="invertEffect">invert</button>
-    <button name="effect" value="shakeEffect">shake</button>
-</div>
-<div class="category">
-    <input id="word" value=""/>
-    <button id="wordButton" name="word" value="">change text</button>
-</div>
-<div id="imageTree" class="imageTree"></div>
-<div id="hiddenTree" class="imageTree hiddenTree"></div>
-</body>
+        <meta
+            name="viewport"
+            content="width=device-width, initial-scale=1.0, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0"
+        />
+    </head>
+    <body>
+        <div class="category">
+            <button name="images" value="0">random images</button>
+        </div>
+        <div class="category">
+            <button name="grid" value="1">1</button>
+            <button name="grid" value="2">2</button>
+            <button name="grid" value="4">4</button>
+            <button name="grid" value="7">7</button>
+            <button name="grid" value="9">9</button>
+            <button name="grid" value="14">14</button>
+        </div>
+        <div class="category">
+            <button name="speed" value="0.5">Slow</button>
+            <button name="speed" value="1">Normal</button>
+            <button name="speed" value="2">Fast</button>
+            <button name="speed" value="4">Super Fast</button>
+        </div>
+        <div class="category">
+            <button name="effect" value="swipeEffect">swipe</button>
+            <button name="effect" value="colorEffect">color</button>
+            <button name="effect" value="flipEffect">flip</button>
+            <button name="effect" value="invertEffect">invert</button>
+            <button name="effect" value="shakeEffect">shake</button>
+        </div>
+        <div class="category">
+            <input id="word" value="" />
+            <button id="wordButton" name="word" value="">change text</button>
+        </div>
+        <div id="imageTree" class="imageTree"></div>
+    </body>
 </html>

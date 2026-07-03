@@ -78,7 +78,6 @@ const mockData = {
       "/gif-visuals/gifs/tdfu/tdfu2.gif",
     ],
   ],
-  hiddenTree: [],
   images: [
     "/gif-visuals/gifs/fun2/13.gif",
     "/gif-visuals/gifs/fun2/ludo.gif",

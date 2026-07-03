@@ -11,13 +11,11 @@ class gifsApi {
     this.word = "TRAP DA FUCK UP 2.4";
 
     this.imageTree = this.createList("/gifs/");
-    this.hiddenTree = this.createList("/secret/");
     this.setRandom.call(this);
 
     this.getData = () => {
       return {
         imageTree: this.imageTree,
-        hiddenTree: this.hiddenTree,
         images: this.selected,
         effect: this.effect,
         speed: this.speed,
@@ -45,8 +43,6 @@ class gifsApi {
     this.setImages = (index, hidden) => {
       if (index == null) {
         this.setRandom.call(this);
-      } else if (hidden) {
-        this.setSelected.call(this, this.hiddenTree[index]);
       } else {
         this.setSelected.call(this, this.imageTree[index]);
       }
