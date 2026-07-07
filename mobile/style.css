@@ -1,0 +1,52 @@
+body {
+    width: 100%;
+    margin: 0;
+    font-size: 3em;
+}
+
+.category {
+    flex-wrap: wrap;
+    display: flex;
+    width: 100%;
+    margin: 5px 0;
+}
+
+button, input {
+    font-size: 16px;
+    flex-grow: 1;
+    width: 20%;
+    border: none;
+    padding: 3%;
+    margin: 2px;
+    background: #333;
+    color: white;
+    text-align: center;
+}
+
+input {
+    background: white;
+    border: 1px solid black;
+    color: black;
+}
+
+button.changeGrid {
+    min-width: 30px;
+}
+
+.imageTree {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    margin: 10px;
+    border: 1px solid black;
+}
+
+.imageTree-item {
+    width: 20%;
+    margin: 10px;
+}
+
+.imageTree-item img {
+    width: 100%;
+    height: auto;
+}

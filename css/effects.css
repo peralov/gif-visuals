@@ -1,0 +1,134 @@
+.effect {
+    transition: opacity .3s, filter .4s, transform .4s, top .2s, left .2s, width .2s, height .2s;
+}
+
+.hueEffect {
+    filter: saturate(50%) contrast(50%);
+}
+
+.hueEffect.even {
+    filter: saturate(150%) contrast(150%);
+}
+
+
+.hueEffect.col {
+    filter: hue-rotate(120deg);
+}
+
+.hueEffect.row {
+    filter: hue-rotate(240deg);
+}
+
+
+.colorEffect {
+    filter: grayscale(1);
+    opacity: .1;
+    transition: opacity .4s, filter .2s;
+}
+
+.colorEffect.range {
+    filter: grayscale(0) saturate(150%);
+    opacity: 1;
+}
+
+.invertEffect {
+    filter: invert(0);
+    transition: filter .1s;
+}
+
+.invertEffect.odd {
+    filter: invert(1) contrast(120%) saturate(200%) hue-rotate(-90deg);
+}
+
+.zoomEffect {
+    opacity: 0.2;
+
+}
+
+.zoomEffect.active {
+    z-index: 1000 !important;
+    filter: grayscale(0);
+    opacity: 1;
+    top: 2% !important;
+    left: 2% !important;
+    width: 96% !important;
+    height: 96% !important;
+
+}
+
+.swipeEffect {
+    top: 0% !important;
+    left: 0% !important;
+    width: 100% !important;
+    height: 100% !important;
+    margin: 0;
+    transform: translateX(-120%);
+    transition: transform .4s, top 0s, left 0s, width 0s, height 0s;
+}
+
+.swipeEffect .inner-div {
+    margin: 0;
+    width: 100%;
+    height: 100%;
+}
+
+.swipeEffect.prev {
+    display: block !important;
+    transform: translateX(100%);
+    z-index: 0;
+}
+
+.swipeEffect.active {
+    display: block !important;
+    z-index: 1000 !important;
+    transform: translateX(0%);
+}
+
+.swipeEffect.next {
+    display: block !important;
+    z-index: 500;
+    transition: transform 0s;
+    transform: translateX(-100%);
+}
+
+.shakeEffect {
+    transform: translateX(0%) translateY(0%) scale(.9);
+    transition: transform .4s, opacity .2s;
+
+}
+
+.shakeEffect.range {
+    transform: scale(1.3) rotateZ(-3deg)  !important;
+    transition: transform .2s;
+    z-index: 1000 !important;
+    opacity: 1 !important;
+}
+
+.shakeEffect.even {
+    transform: scale(0.5);
+    opacity: .5;
+    z-index: 0;
+}
+
+.shakeEffect.odd {
+    filter: saturate(150%);
+    transform: scale(1) rotateZ(1deg);
+    transition: transform .1s;
+    z-index: 100;
+    opacity: .8;
+}
+
+
+.flipEffect {
+    transition: transform 1s;
+    transform: rotateX(0deg);
+}
+
+
+.flipEffect.row {
+    transition: transform 0s;
+    transform: rotateX(360deg);
+}
+
+
+
