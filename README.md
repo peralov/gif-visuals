@@ -6,6 +6,8 @@ animated GIFs, applies rhythmic visual effects, and lets a second browser act as
 a mobile controller for changing GIF sets, grid density, speed, effects, and the
 large text overlay.
 
+![A grid of rendered gifs](https://github.com/peralov/gif-visuals/blob/gif-visuals-nodejs/public/img/cover1.png?raw=true)
+
 A static demo is available at <https://peralov.github.io/gif-visuals>.
 
 ## Project Idea
